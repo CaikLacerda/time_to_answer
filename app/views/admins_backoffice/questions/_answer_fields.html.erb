@@ -1,0 +1,7 @@
+<div class="nested-fields">
+  <%= f.label :description %> <br>
+  <%= f.text_field :description, class: "mb-3" %>
+  <%= f.check_box :correct, class: "ms-3" %> Resposta Correta
+
+  <%= link_to_remove_association('Remover', f, class: "btn btn-danger ms-3")  %>
+</div>

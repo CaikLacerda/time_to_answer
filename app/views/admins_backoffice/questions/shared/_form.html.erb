@@ -1,0 +1,61 @@
+<div class="row">
+  <div class="col-lg-12">
+    <h1 class="mb-4"><%= action_message %></h1>
+  </div>
+</div>
+
+<div class="row">
+
+    <% if @question.errors.any? %>
+      <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        <ul>
+          <% @question.errors.full_messages.each do |message| %>
+            <li> <%= message %> </li>
+          <% end %>
+        </ul>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+    <% end %>
+
+  <div class="col-lg-12">
+    <div class="card shadow-sm"> 
+
+      <div class="card-header bg-primary text-white">
+        <strong><%= action_message %> </strong>
+      </div>
+
+      <div class="card-body">
+        <div class="row">
+          <div class="col-lg-6"> 
+
+            <%= form_with(model: [:admins_backoffice, @question], local:true) do |form| %>
+              <div class="mb-3">
+                <%= form.label :description %>
+                <%= form.text_area :description, class:"form-control", placeholder: t('messages.placeholder_input', pronoun:"a", attribute: @question.model_name.human), rows:"5" %>
+              </div>
+
+              <div class="mb-3">
+                <%= form.label :subject %>
+                <%= form.collection_select(:subject_id, @subjects, :id, :description, {}, {class:"form-control"}) %>
+              </div>
+
+              <div id="answers">
+                <%= form.fields_for :answers do |answer| %>
+                  <%= render partial: "answer_fields", locals: { f: answer } %>
+                <% end %>
+
+                <%= link_to_add_association 'Adicionar Resposta', form, :answers, class: "btn btn-secondary" %>
+              </div>
+
+              <br>
+
+              <button type="submit" class="btn btn-primary"><%= t('messages.submit') %></button>
+            <% end %>
+
+          </div> <!-- /.col-lg-6 -->
+        </div> <!-- /.row -->
+      </div> <!-- /.card-body -->
+
+    </div> <!-- /.card -->
+  </div> <!-- /.col-lg-12 -->
+</div> <!-- /.row -->

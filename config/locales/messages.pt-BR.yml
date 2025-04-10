@@ -1,0 +1,9 @@
+'pt-BR':
+  messages:
+    listing: Listando %{model}
+    confirm_with: Você realmente deseja excluir %{item} ?
+    editing: Editando %{model}
+    new: Criando %{model}
+    submit: Salvar
+    password_confirmation: Confirme a sua senha
+    placeholder_input: Digite %{pronoun} %{attribute}

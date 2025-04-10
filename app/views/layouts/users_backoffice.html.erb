@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>Time to Answer</title>
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
+
+  <%= javascript_importmap_tags %>
+
+  <!-- Estilos -->
+<link rel="stylesheet" href="/templates/startbootstrap-sb-admin-2/css/sb-admin-2.min.css">
+<link href="/templates/startbootstrap-sb-admin-2/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+</head>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<body id="page-top">
+
+  <body id="page-top"></body>
+
+    <!-- Page Wrapper -->
+    <div id="wrapper">
+
+        <!-- Sidebar -->
+        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+
+            <%= link_to 'User Backoffice', site_welcome_index_path, class: "sidebar-brand d-flex align-items-center justify-content-center" %>
+
+            <div class="profile d-flex align-items-center">
+                <div class="profile_pic me-3">
+                    <%= link_to image_tag(avatar_url, alt: "...", class: "rounded-circle profile_img", id: "imgAvatarMd"), '#', "data-bs-toggle": "modal", "data-bs-target": "#avatarModal" %>
+                </div>
+                <div class="profile_info text-light">
+                    <span>Seja bem-vindo,</span>
+                    <h2><%= current_user.full_name %></h2>
+                </div>
+            </div>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider my-0">
+
+            <li class="nav-item">
+                <%= link_to users_backoffice_welcome_index_path, class:"nav-link" do%>
+                    <i class="fa fa-home"></i>
+                    <span>Início</span>
+                <% end %>
+            </li>
+
+            <li class="nav-item">
+                <%= link_to users_backoffice_profile_path, class:"nav-link" do%>
+                    <i class="fa fa-user"></i>
+                    <span>Dados do perfil</span>
+                <% end %>
+            </li>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider">
+
+        </ul>
+        <!-- End of Sidebar -->
+
+        <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column min-vh-100">
+
+            <!-- Main Content -->
+            <div id="content" class="flex-grow-1">
+
+                <!-- Topbar -->
+                <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+
+                    <!-- Topbar Navbar -->
+                    <ul class="navbar-nav ml-auto">
+
+                        <div class="topbar-divider d-none d-sm-block"></div>
+
+                        <!-- Nav Item - User Information -->
+                        <li class="nav-item dropdown no-arrow">
+                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <img class="img-profile rounded-circle"
+                                    src="/templates/startbootstrap-sb-admin-2/img/undraw_profile.svg">
+                            </a>
+                            <!-- Dropdown - User Information -->
+                            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                                aria-labelledby="userDropdown">
+                                <%= link_to destroy_user_session_path, method: :delete, class: "dropdown-item" do %>
+                                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    Logout
+                                <% end %>
+                            </div>
+                        </li>
+
+                    </ul>
+
+                </nav>
+                <!-- End of Topbar -->
+
+                <!-- Begin Page Content -->
+                <div class="container-fluid">
+
+                    <!-- Page Heading -->
+                    <%= yield %>
+
+                </div>
+                <!-- /.container-fluid -->
+
+            </div>
+            <!-- End of Main Content -->
+
+            <!-- Footer -->
+            <footer class="sticky-footer bg-white mt-auto">
+                <div class="container my-auto">
+                    <div class="copyright text-center my-auto">
+                        <span>Copyright &copy; Developed by Caik Lacerda</span>
+                    </div>
+                </div>
+            </footer>
+            <!-- End of Footer -->
+
+        </div>
+        <!-- End of Content Wrapper -->
+
+    </div>
+    <!-- End of Page Wrapper -->
+
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <%= form_with(url: users_backoffice_profile_path, model: current_user , local: true, class: "form-horizontal form-label-left") do |form| %>
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Avatar</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <%= form.fields_for :user_profile do |profile_form| %>
+                        <div class="form-group">
+                            <%= profile_form.label :avatar %>
+                            <%= image_tag(avatar_url, alt: "...", class: "rounded-circle profile_img") %>
+                            <%= profile_form.file_field :avatar %>
+                        </div>
+                    <% end %>
+                </div>
+                <div class="modal-footer">
+                    <%= form.submit "Salvar", class: "btn btn-primary" %>
+                </div>
+                <% end %>
+            </div>
+        </div>
+    </div>
+
+  <!-- Scripts -->
+  <%= javascript_include_tag "rails-ujs" %>
+  <script src="/templates/startbootstrap-sb-admin-2/vendor/jquery/jquery.min.js"></script>
+  <script src="/templates/startbootstrap-sb-admin-2/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="/templates/startbootstrap-sb-admin-2/js/sb-admin-2.min.js"></script>
+</body>
+</html>

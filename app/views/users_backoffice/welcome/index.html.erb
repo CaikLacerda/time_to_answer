@@ -1,0 +1,25 @@
+<h1 class="mb-5 ms-3">Aqui estão suas estatísticas!</h1>
+
+<div class="d-flex gap-3 flex-wrap">
+
+  <div class="card border-dark mb-3 ms-3" style="max-width: 18rem;">
+    <div class="card-header">Total de respostas</div>
+    <div class="card-body">
+      <h5 class="card-title"><%= @user_statistic.total_questions %></h5>
+    </div>
+  </div>
+
+  <div class="card border-success mb-3" style="max-width: 18rem;">
+    <div class="card-header">Respostas corretas</div>
+    <div class="card-body text-success">
+      <h5 class="card-title"><%= @user_statistic.right_questions %></h5>
+    </div>
+  </div>
+
+  <div class="card border-danger mb-3" style="max-width: 18rem;">
+    <div class="card-header">Respostas erradas</div>
+    <div class="card-body text-danger">
+      <h5 class="card-title"><%= @user_statistic.wrong_questions %></h5>
+    </div>
+  </div>
+</div>
